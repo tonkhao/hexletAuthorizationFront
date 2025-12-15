@@ -1,15 +1,14 @@
-import { useState } from 'react'
 import './App.css'
+import { AuthFirstStep } from './components/AuthFirstStep'
+import { AuthSecondStep } from './components/AuthSecondStep'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Авторизация
-        </button>
+      <div className="authFormContainer">
+        <AuthFirstStep />
+        <AuthSecondStep />
       </div>
     </>
   )
