@@ -8,13 +8,18 @@
 .authFormContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 440px;
   height: 372px;
   background: #fff;
 }
 
 .companyLogo {
+  width: 376px;
+  height: 132px;
   margin: 20px;
+  background: silver;
 }
 
 .inputsWrapper {
@@ -23,4 +28,12 @@
 
 .textInput {
   display: block;
+  width: 376px;
+  height: 40px;
+}
+
+.buttonInput {
+  display: block;
+  width: 376px;
+  height: 40px;
 }
