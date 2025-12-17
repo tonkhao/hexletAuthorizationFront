@@ -42,8 +42,18 @@
   margin: 0;
 }
 
-.inputsWrapper {
+.inputsOutterWrapper {
   margin: 20px;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.iconContainer {
+  position: absolute;
+  top: 12px;
+  left: 12px;
 }
 
 .textInput {

@@ -18,13 +18,6 @@
   font-style: normal;
 }
 
-/* @font-face {
-  font-family: 'MyCustomFont';
-  src: url('./assets/fonts/MyCustomFont-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-} */
-
 a {
   font-weight: 500;
   color: #646cff;
