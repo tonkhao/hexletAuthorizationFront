@@ -1,11 +1,32 @@
+import { type ChangeEvent } from "react";
 import { LockedIcon } from "../assets/LockedIcon";
 import { LogoIcon } from "../assets/LogoIcon";
 import { UserIcon } from "../assets/UserIcon";
+import type { IdType } from "../utils/types";
 
-export function AuthFirstStep() {
-  const checkFirstStepAuth = () => {
-    console.log("CHECK 1 STEP");
+interface AuthFirstStepProps {
+  loginValue: IdType, 
+  loginChange: (value: string) => void, 
+  passwordValue: IdType, 
+  passwordChange: (value: string) => void, 
+  buttonClick: () => void
+}
+
+export function AuthFirstStep(props: AuthFirstStepProps) {
+
+  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log()
+    props.loginChange(event.target.value);
   };
+
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    props.passwordChange(event.target.value);
+  };
+
+  const handleFirstStepAuth = () => {
+    props.buttonClick();
+  };
+
   return (
     <>
       <div className="formHeader">
@@ -25,21 +46,21 @@ export function AuthFirstStep() {
           <div className="iconContainer">
             <UserIcon />
           </div>
-          <input className="textInput" type="text" />
+          <input className="textInput" value={props.loginValue} onChange={(e) => handleLoginChange(e)} type="text" />
         </div>
         <div className="inputContainer">
           <div className="iconContainer">
             <LockedIcon />
           </div>
-          <input className="textInput" type="password" />
+          <input className="textInput" value={props.passwordValue} onChange={(e) => handlePasswordChange(e)} type="password" />
         </div>
       </div>
       <div className="buttonContainer">
         <input
-          className="buttonInput"
+          className="buttonInput buttonLocked"
           type="button"
           value="Log in"
-          onClick={() => checkFirstStepAuth()}
+          onClick={() => handleFirstStepAuth()}
         />
       </div>
     </>
