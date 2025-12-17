@@ -22,11 +22,11 @@ export function AuthFirstStep(props: AuthFirstStepProps) {
     props.passwordChange(event.target.value);
   };
 
-  const handleFirstStepAuth = () => {
+  const handleFirstStepAuth =  async () => {
     props.buttonClick();
   };
 
-  const getButtonClassName = () => {
+  const getFirstStepButtonClassName = () => {
     if (props.isFirstStepButtonDisabled) {
       return "buttonInput buttonLocked";
     }
@@ -73,7 +73,7 @@ export function AuthFirstStep(props: AuthFirstStepProps) {
       </div>
       <div className="buttonContainer">
         <input
-          className={getButtonClassName()}
+          className={getFirstStepButtonClassName()}
           type="button"
           value="Log in"
           onClick={() => handleFirstStepAuth()}
