@@ -43,7 +43,7 @@
 }
 
 .inputsOutterWrapper {
-  margin: 20px;
+  width: 376px;
 }
 
 .inputContainer {
@@ -56,14 +56,18 @@
   left: 12px;
 }
 
-.textInput {
+input[type="text"].textInput, input[type="password"].textInput {
   display: block;
   width: 376px;
   height: 40px;
+  border: none;
   border: 1px solid #D9D9D9;
   border-radius: 7px;
   margin-bottom: 15px;
+  padding-left: 30px;
 }
+
+.buttonContainer {}
 
 .buttonInput {
   display: block;

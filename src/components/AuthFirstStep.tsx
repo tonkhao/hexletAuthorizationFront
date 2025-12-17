@@ -34,13 +34,14 @@ export function AuthFirstStep() {
           <input className="textInput" type="password" />
         </div>
       </div>
-
-      <input
-        className="buttonInput"
-        type="button"
-        value="Log in"
-        onClick={() => checkFirstStepAuth()}
-      />
+      <div className="buttonContainer">
+        <input
+          className="buttonInput"
+          type="button"
+          value="Log in"
+          onClick={() => checkFirstStepAuth()}
+        />
+      </div>
     </>
   );
 }
