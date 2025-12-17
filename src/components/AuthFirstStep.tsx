@@ -5,17 +5,16 @@ import { UserIcon } from "../assets/UserIcon";
 import type { IdType } from "../utils/types";
 
 interface AuthFirstStepProps {
-  loginValue: IdType, 
-  loginChange: (value: string) => void, 
-  passwordValue: IdType, 
-  passwordChange: (value: string) => void, 
-  buttonClick: () => void
+  loginValue: IdType;
+  loginChange: (value: string) => void;
+  passwordValue: IdType;
+  passwordChange: (value: string) => void;
+  buttonClick: () => void;
+  isFirstStepButtonDisabled: boolean;
 }
 
 export function AuthFirstStep(props: AuthFirstStepProps) {
-
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log()
     props.loginChange(event.target.value);
   };
 
@@ -25,6 +24,13 @@ export function AuthFirstStep(props: AuthFirstStepProps) {
 
   const handleFirstStepAuth = () => {
     props.buttonClick();
+  };
+
+  const getButtonClassName = () => {
+    if (props.isFirstStepButtonDisabled) {
+      return "buttonInput buttonLocked";
+    }
+    return "buttonInput buttonUnlocked";
   };
 
   return (
@@ -46,18 +52,28 @@ export function AuthFirstStep(props: AuthFirstStepProps) {
           <div className="iconContainer">
             <UserIcon />
           </div>
-          <input className="textInput" value={props.loginValue} onChange={(e) => handleLoginChange(e)} type="text" />
+          <input
+            className="textInput"
+            value={props.loginValue}
+            onChange={(e) => handleLoginChange(e)}
+            type="text"
+          />
         </div>
         <div className="inputContainer">
           <div className="iconContainer">
             <LockedIcon />
           </div>
-          <input className="textInput" value={props.passwordValue} onChange={(e) => handlePasswordChange(e)} type="password" />
+          <input
+            className="textInput"
+            value={props.passwordValue}
+            onChange={(e) => handlePasswordChange(e)}
+            type="password"
+          />
         </div>
       </div>
       <div className="buttonContainer">
         <input
-          className="buttonInput buttonLocked"
+          className={getButtonClassName()}
           type="button"
           value="Log in"
           onClick={() => handleFirstStepAuth()}

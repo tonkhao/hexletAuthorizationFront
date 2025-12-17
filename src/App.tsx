@@ -10,13 +10,25 @@ function App() {
 
   const [passwordValue, setPasswordValue] = useState("");
 
+  const [isFirstStepButtonDisabled, setFirstStepButtonDisabled] = useState(true)
+
   const onHandleLoginChange = (value: string) => {
     setLoginValue(value);
+    checkFirstStepButtonDisabled()
   };
 
   const onHandlePasswordChange = (value: string) => {
     setPasswordValue(value);
+    checkFirstStepButtonDisabled()
   };
+
+  const checkFirstStepButtonDisabled = () => {
+    if (loginValue && passwordValue) {
+      setFirstStepButtonDisabled(false)
+    } else {
+      setFirstStepButtonDisabled(true)
+    }
+  }
 
     const onHandleFirstStepAuth = () => {
     // event.preventDefault();
@@ -34,6 +46,7 @@ function App() {
             passwordValue={passwordValue}
             passwordChange={onHandlePasswordChange}
             buttonClick={onHandleFirstStepAuth}
+            isFirstStepButtonDisabled={isFirstStepButtonDisabled}
           />
         ) : (
           <AuthSecondStep />
