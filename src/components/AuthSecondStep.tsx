@@ -5,6 +5,10 @@ export function AuthSecondStep() {
     }
   };
 
+  const checkSecondStepAuth = () => {
+    console.log("CHECK 2 STEP")
+  }
+
   return (
     <>
       <div className="companyLogo">
@@ -19,7 +23,7 @@ export function AuthSecondStep() {
         className="buttonInput"
         type="button"
         value="Log in"
-        onClick={() => console.log("clock")}
+        onClick={() => checkSecondStepAuth()}
       />
     </>
   );

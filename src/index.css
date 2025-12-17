@@ -11,6 +11,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'SFProTextSemibold';
+  src: url('./assets/fonts/SFProText-Semibold.ttf') format('ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* @font-face {
+  font-family: 'MyCustomFont';
+  src: url('./assets/fonts/MyCustomFont-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+} */
+
 a {
   font-weight: 500;
   color: #646cff;

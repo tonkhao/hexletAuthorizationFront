@@ -8,18 +8,38 @@
 .authFormContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 440px;
   height: 372px;
   background: #fff;
 }
 
-.companyLogo {
+.formHeader {
   width: 376px;
   height: 132px;
   margin: 20px;
-  background: silver;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 376px;
+  height: 64px;
+}
+
+.descriptionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signInText {
+  font-family: 'SFProTextSemibold';
+  font-size: 24px;
+  letter-spacing: 0;
+  margin: 0;
 }
 
 .inputsWrapper {
@@ -30,6 +50,9 @@
   display: block;
   width: 376px;
   height: 40px;
+  border: 1px solid #D9D9D9;
+  border-radius: 7px;
+  margin-bottom: 15px;
 }
 
 .buttonInput {
