@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { AuthFirstStep } from "./components/AuthFirstStep";
 import { AuthSecondStep } from "./components/AuthSecondStep";
-import { loginApi } from "./db/mockLoginServ";
+import { loginApi, verifyCodeApi } from "./db/mockLoginServ";
 
 function App() {
   const [isFirstStepPass, setFirstStepPass] = useState(false);
@@ -14,7 +14,7 @@ function App() {
   const [isFirstStepButtonDisabled, setFirstStepButtonDisabled] =
     useState(true);
 
-  const [digitsValue, setDigitsValue] = useState("");
+  const [codeValue, setCodeValue] = useState("");
 
     const [isSecondStepButtonError, setSecondStepButtonError] =
     useState(true);
@@ -39,8 +39,8 @@ function App() {
     }
   };
 
-  const onHandleDigitsChange = (value: string) => {
-    setDigitsValue(value);
+  const onHandleCodeChange = (value: string) => {
+    setCodeValue(value);
     checkSecondStepButtonDisabled();
   };
 
@@ -70,7 +70,7 @@ function App() {
 
   const onHandleSecondStepAuth = async () => {
     try {
-      const result = true
+      const result = await verifyCodeApi({code: code})
       if (result.success) {
         console.log("LOGIN SUCCESS")
       } else {
@@ -118,8 +118,8 @@ function App() {
           />
         ) : (
           <AuthSecondStep
-            digitsValue={digitsValue}
-            digitsChange={onHandleDigitsChange}
+            codeValue={codeValue}
+            digitsChange={onHandleCodeChange}
             buttonClick={onHandleSecondStepAuth}
             isSecondStepButtonError={isSecondStepButtonError}
             isSecondStepButtoVisible={isSecondStepButtoVisible}

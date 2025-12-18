@@ -1,32 +1,51 @@
+import { useState, type ChangeEvent } from "react";
 import { LogoIcon } from "../assets/LogoIcon";
 
 interface AuthSecondStepProps {
-  digitsValue: string;
+  codeValue: string;
   digitsChange: (value: string) => void;
   buttonClick: () => void;
   isSecondStepButtonError: boolean;
   isSecondStepButtoVisible: boolean;
   onHandleSecondStepButtoVisible: () => void;
-  onhandleSecondStepButtonError: () => void
+  onhandleSecondStepButtonError: () => void;
 }
 
 export function AuthSecondStep(props: AuthSecondStepProps) {
+  const [codeArrValue, setCodeArrValue] = useState([0, 0, 0, 0, 0, 0]);
+
   const getSecondStepButtonText = () => {
-    if (true) {
-      return "Get new"
+    if (!codeArrValue.length) {
+      return "Get new";
     }
-    return "Continue"
-  }
-  let ren = [];
-  const digInputsRender = () => {
+    return "Continue";
+  };
+
+  const codeInputsRender = () => {
+    let ren = [];
     for (let index = 0; index < 6; index++) {
-      ren.push(<input id={String(index)} className="digInput" type="text" />)
+      ren.push(
+        <input
+          id={String(index)}
+          className="digInput"
+          type="text"
+          onChange={(e) => handleCodeArrChange(e, String(index))}
+        />
+      );
     }
     return ren;
   };
 
+  const handleCodeArrChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: string
+  ) => {
+    
+    setCodeArrValue(event.target.value);
+  };
+
   const handleSecondStepAuth = () => {
-    console.log("CHECK 2 STEP");
+    props.buttonClick();
   };
 
   const getSecondStepButtonClassName = () => {
@@ -44,20 +63,22 @@ export function AuthSecondStep(props: AuthSecondStepProps) {
         </div>
         <div className="descriptionContainer">
           <p className="twoFactorAuthText">Two-factor authentification</p>
-          <p className="twoFactorAuthTextDesc">Enter the 6-digit code from the Google Authenticator app</p>
+          <p className="twoFactorAuthTextDesc">
+            Enter the 6-digit code from the Google Authenticator app
+          </p>
         </div>
       </div>
-      <div className="inputsOutterWrapper">
-       {digInputsRender()}
-      </div>
-      {props.isSecondStepButtoVisible && <div className="buttonContainer">
-        <input
-          className={getSecondStepButtonClassName()}
-          type="button"
-          value={getSecondStepButtonText()}
-          onClick={() => handleSecondStepAuth()}
-        />
-      </div>}
+      <div className="inputsOutterWrapper">{codeInputsRender()}</div>
+      {props.isSecondStepButtoVisible && (
+        <div className="buttonContainer">
+          <input
+            className={getSecondStepButtonClassName()}
+            type="button"
+            value={getSecondStepButtonText()}
+            onClick={() => handleSecondStepAuth()}
+          />
+        </div>
+      )}
     </>
   );
 }
