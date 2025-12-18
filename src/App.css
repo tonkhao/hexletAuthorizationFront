@@ -75,6 +75,7 @@ input[type="text"].textInput, input[type="password"].textInput {
   border: 1px solid #D9D9D9;
   border-radius: 7px;
   margin: 0 7px 15px 7px;
+  text-align: center;
 }
 
 .digInput:first-child {

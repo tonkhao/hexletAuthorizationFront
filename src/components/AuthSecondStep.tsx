@@ -3,23 +3,20 @@ import { LogoIcon } from "../assets/LogoIcon";
 
 interface AuthSecondStepProps {
   codeValue: string;
-  digitsChange: (value: string) => void;
-  buttonClick: () => void;
+  codeChange: (value: string) => void;
+  codeButtonClick: (code: string) => void;
   isSecondStepButtonError: boolean;
-  isSecondStepButtoVisible: boolean;
-  onHandleSecondStepButtoVisible: () => void;
-  onhandleSecondStepButtonError: () => void;
 }
 
 export function AuthSecondStep(props: AuthSecondStepProps) {
-  const [codeArrValue, setCodeArrValue] = useState([0, 0, 0, 0, 0, 0]);
-
-  const getSecondStepButtonText = () => {
-    if (!codeArrValue.length) {
-      return "Get new";
-    }
-    return "Continue";
-  };
+  const [codeArrValue, setCodeArrValue] = useState([
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+  ]);
 
   const codeInputsRender = () => {
     let ren = [];
@@ -37,21 +34,22 @@ export function AuthSecondStep(props: AuthSecondStepProps) {
   };
 
   const handleCodeArrChange = (
-    e: ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
     index: string
   ) => {
-    
-    setCodeArrValue(event.target.value);
+    let code = codeArrValue.join("");
+    const modifiedArr = code.split("")
+    modifiedArr[Number(index)] = event.target.value
+    setCodeArrValue(modifiedArr)
+    code = modifiedArr.join("")
+    props.codeChange(code);
   };
 
   const handleSecondStepAuth = () => {
-    props.buttonClick();
+    props.codeButtonClick(props.codeValue);
   };
 
   const getSecondStepButtonClassName = () => {
-    if (props.isSecondStepButtonError) {
-      return "buttonInput buttonLocked";
-    }
     return "buttonInput buttonUnlocked";
   };
 
@@ -69,16 +67,14 @@ export function AuthSecondStep(props: AuthSecondStepProps) {
         </div>
       </div>
       <div className="inputsOutterWrapper">{codeInputsRender()}</div>
-      {props.isSecondStepButtoVisible && (
-        <div className="buttonContainer">
-          <input
-            className={getSecondStepButtonClassName()}
-            type="button"
-            value={getSecondStepButtonText()}
-            onClick={() => handleSecondStepAuth()}
-          />
-        </div>
-      )}
+      <div className="buttonContainer">
+        <input
+          className={getSecondStepButtonClassName()}
+          type="button"
+          value={"Continue"}
+          onClick={() => handleSecondStepAuth()}
+        />
+      </div>
     </>
   );
 }

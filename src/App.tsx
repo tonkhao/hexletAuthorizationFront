@@ -16,10 +16,7 @@ function App() {
 
   const [codeValue, setCodeValue] = useState("");
 
-    const [isSecondStepButtonError, setSecondStepButtonError] =
-    useState(true);
-
-    const [isSecondStepButtoVisible, setSecondStepButtoVisible] = useState(false);
+  const [isSecondStepButtonError, setSecondStepButtonError] = useState(true);
 
   const onHandleLoginChange = (value: string) => {
     setLoginValue(value);
@@ -68,68 +65,44 @@ function App() {
     }
   };
 
-  const onHandleSecondStepAuth = async () => {
+  const onHandleSecondStepAuth = async (code: string) => {
     try {
-      const result = await verifyCodeApi({code: code})
+      const result = await verifyCodeApi({ code: code });
       if (result.success) {
-        console.log("LOGIN SUCCESS")
+        console.log("LOGIN SUCCESS");
+        setSecondStepButtonError(false);
       } else {
-        console.log("LOGIN ERROR")
+        console.log("LOGIN ERROR");
+        setSecondStepButtonError(true);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onHandleSecondStepButtoVisible = async () => {
-    try {
-      if (true) {
-        setSecondStepButtoVisible(true)
-      } else {
-        setSecondStepButtoVisible(false)
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-    const onhandleSecondStepButtonError = async () => {
-    try {
-      if (true) {
-        setSecondStepButtonError(true)
-      } else {
-        setSecondStepButtonError(false)
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    return (
+      <>
+        <div className="authFormContainer">
+          {!isFirstStepPass ? (
+            <AuthFirstStep
+              loginValue={loginValue}
+              loginChange={onHandleLoginChange}
+              passwordValue={passwordValue}
+              passwordChange={onHandlePasswordChange}
+              buttonClick={onHandleFirstStepAuth}
+              isFirstStepButtonDisabled={isFirstStepButtonDisabled}
+            />
+          ) : (
+            <AuthSecondStep
+              codeValue={codeValue}
+              codeChange={onHandleCodeChange}
+              codeButtonClick={onHandleSecondStepAuth}
+              isSecondStepButtonError={isSecondStepButtonError}
+            />
+          )}
+        </div>
+      </>
+    );
   };
-
-  return (
-    <>
-      <div className="authFormContainer">
-        {!true ? (
-          <AuthFirstStep
-            loginValue={loginValue}
-            loginChange={onHandleLoginChange}
-            passwordValue={passwordValue}
-            passwordChange={onHandlePasswordChange}
-            buttonClick={onHandleFirstStepAuth}
-            isFirstStepButtonDisabled={isFirstStepButtonDisabled}
-          />
-        ) : (
-          <AuthSecondStep
-            codeValue={codeValue}
-            digitsChange={onHandleCodeChange}
-            buttonClick={onHandleSecondStepAuth}
-            isSecondStepButtonError={isSecondStepButtonError}
-            isSecondStepButtoVisible={isSecondStepButtoVisible}
-            onHandleSecondStepButtoVisible={onHandleSecondStepButtoVisible}
-            onhandleSecondStepButtonError={onhandleSecondStepButtonError}
-          />
-        )}
-      </div>
-    </>
-  );
-}
 
 export default App;
